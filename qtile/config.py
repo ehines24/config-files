@@ -33,27 +33,50 @@ from datetime import datetime
 import os
 import subprocess
 
-# MACHINE SPECIFIC VARS
+# ENVIRONMENT VARIABLES
+os.environ['QT_QPA_PLATFORMTHEME'] = 'qt5ct'
+os.environ['XCURSOR_THEME'] = 'Breeze_Light'
+
+# MACHINE SPECIFIC VARS:
 userhome = os.path.expanduser("~/")
+
 
 # BOOLEANS:
 cursor_warp=True
 
+
 # HOOKS:
-@hook.subscribe.restart
-@hook.subscribe.startup_once
+@hook.subscribe.startup
 def autostart():
     logger.warning("Autostart hook has fired off.")
     script= userhome + ".config/qtile/autostart.sh" 
     subprocess.run([script])
+@hook.subscribe.client_name_updated
+def window_rules(client):
+    if "UMass Amherst Mail" in client.name:
+        client.togroup("3")
+@hook.subscribe.screens_reconfigured
+def screen_reconf():
+    logger.warning("Screens have been reconfigured")
+    qtile.reload_config()
 
 mod = "mod4"
 terminal = guess_terminal()
+menu = "rofi -show drun"
 # make it simple to see if config gets updated
 date = datetime.now()
 logger.warning(date)
 date = f'{date.hour}:{date.minute}'
-
+# Switch screen window functionality
+def window_cycle_screen(qtile, move_window=True, change_screen=True):
+    i = qtile.screens.index(qtile.current_screen)
+    # move to screen i + 1 and wrap back around to the first screen
+    if move_window: 
+        group = qtile.screens[(i+1) % len(qtile.screens)].group.name
+        qtile.current_window.togroup(group)
+    if change_screen:
+        qtile.to_screen((i+1) % len(qtile.screens))
+        
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -99,9 +122,11 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "r", lazy.spawn(os.path.expanduser("~/.config/qtile/autostart.sh")), desc="Resize the virtual display to match the window"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawn(menu), desc="Spawn a command using a prompt widget"),
     # custom keys
-    Key([mod], "i", lazy.spawn("firefox"), desc="Quick shortcut to [i]nternet browser")
+    Key([mod], "i", lazy.spawn("firefox"), desc="Quick shortcut to [i]nternet browser"),
+    Key([mod], "comma", lazy.function(window_cycle_screen)),
+    Key([mod], "period", lazy.function(window_cycle_screen, move_window=False))
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -205,8 +230,14 @@ screens = [
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
-        wallpaper=userhome + ".config/qtile/Stock_Photo_Prog_Python.jpg"
+        wallpaper=userhome + "Pictures/wallpapers/budapest.jpg",
+        wallpaper_mode="fill"
     ),
+    Screen(
+        # for the second screen, if connected
+        wallpaper=userhome + "Pictures/wallpapers/budapest.jpg",
+        wallpaper_mode="fill"
+    )
 ]
 
 # Drag floating layouts.
