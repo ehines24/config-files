@@ -1,4 +1,4 @@
-# Copyright (c) 2010 Aldo Cortesi
+# Copyright (c) 2009 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
 # Copyright (c) 2012 Randall Ma
 # Copyright (c) 2012-2014 Tycho Andersen
@@ -33,24 +33,32 @@ from datetime import datetime
 import os
 import subprocess
 
-# ENVIRONMENT VARIABLES
-os.environ['QT_QPA_PLATFORMTHEME'] = 'qt5ct'
+# ENVIRONMENT VARIABLES AND PREFERENCES 
+os.environ['QT_QPA_PLATFORMTHEME'] = 'qt6ct' 
 os.environ['XCURSOR_THEME'] = 'Breeze_Light'
+preferred_terminal = "qterminal"
+screen_locker = ["betterlockscreen", "--lock"]
 
 # MACHINE SPECIFIC VARS:
 userhome = os.path.expanduser("~/")
 
-
 # BOOLEANS:
 cursor_warp=True
 
-
 # HOOKS:
+@hook.subscribe.startup_once
+def autostart_once():
+    if qtile.core.name == "wayland":
+        script= userhome + ".config/qtile/autostart-wayland.sh" 
+        subprocess.run([script])
+        logger.warning("Autostarted Wayland script")
 @hook.subscribe.startup
 def autostart():
-    logger.warning("Autostart hook has fired off.")
-    script= userhome + ".config/qtile/autostart.sh" 
-    subprocess.run([script])
+    if qtile.core.name != "wayland":
+        logger.warning("Autostart hook has fired off.")
+        script= userhome + ".config/qtile/autostart.sh"
+        subprocess.run([script])
+        logger.warning("Autostarted X11 script")
 @hook.subscribe.client_name_updated
 def window_rules(client):
     if "UMass Amherst Mail" in client.name:
@@ -61,7 +69,8 @@ def screen_reconf():
     qtile.reload_config()
 
 mod = "mod4"
-terminal = guess_terminal()
+alt = "mod1"
+terminal = preferred_terminal if not None else guess_terminal()
 menu = "rofi -show drun"
 # make it simple to see if config gets updated
 date = datetime.now()
@@ -76,7 +85,16 @@ def window_cycle_screen(qtile, move_window=True, change_screen=True):
         qtile.current_window.togroup(group)
     if change_screen:
         qtile.to_screen((i+1) % len(qtile.screens))
-        
+# Screen locker 
+def lock_screen(qtile, screen_locker_x: list[str] | None = None, screen_locker_wayland: list[str] | None = None):
+    if qtile.core.name != "wayland":
+        if screen_locker_x != None: 
+            subprocess.run(screen_locker_x)
+        else: return
+    else:
+        if screen_locker_wayland != None:
+            subprocess.run(screen_locker_wayland)
+        else: return
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -126,7 +144,9 @@ keys = [
     # custom keys
     Key([mod], "i", lazy.spawn("firefox"), desc="Quick shortcut to [i]nternet browser"),
     Key([mod], "comma", lazy.function(window_cycle_screen)),
-    Key([mod], "period", lazy.function(window_cycle_screen, move_window=False))
+    Key([mod], "period", lazy.function(window_cycle_screen, move_window=False)),
+    Key([alt], "Tab", lazy.group.next_window()),
+    Key([mod], "l", lazy.function(lock_screen, screen_locker_x=screen_locker))
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -141,7 +161,6 @@ for vt in range(1, 8):
             desc=f"Switch to VT{vt}",
         )
     )
-
 
 groups = [Group(i) for i in "123456789"]
 # The second part is specific to Alacritty
@@ -237,12 +256,12 @@ screens = [
         # for the second screen, if connected
         wallpaper=userhome + "Pictures/wallpapers/budapest.jpg",
         wallpaper_mode="fill"
-    )
+    ),
 ]
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()), 
     Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
@@ -277,7 +296,7 @@ auto_minimize = True
 wl_input_rules = None
 
 # xcursor theme (string or None) and size (integer) for Wayland backend
-wl_xcursor_theme = None
+#wl_xcursor_theme = Breeze_Light 
 wl_xcursor_size = 24
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
