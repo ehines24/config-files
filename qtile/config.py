@@ -38,6 +38,7 @@ os.environ['QT_QPA_PLATFORMTHEME'] = 'qt6ct'
 os.environ['XCURSOR_THEME'] = 'Breeze_Light'
 preferred_terminal = "qterminal"
 screen_locker = ["betterlockscreen", "--lock"]
+suspend_program = ["systemctl", "suspend"]
 
 # MACHINE SPECIFIC VARS:
 userhome = os.path.expanduser("~/")
@@ -86,15 +87,17 @@ def window_cycle_screen(qtile, move_window=True, change_screen=True):
     if change_screen:
         qtile.to_screen((i+1) % len(qtile.screens))
 # Screen locker 
-def lock_screen(qtile, screen_locker_x: list[str] | None = None, screen_locker_wayland: list[str] | None = None):
+def lock_screen(qtile, screen_locker_x: list[str] | None = None, screen_locker_wayland: list[str] | None = None, suspend: bool=False):
     if qtile.core.name != "wayland":
         if screen_locker_x != None: 
-            subprocess.run(screen_locker_x)
+            subprocess.Popen(screen_locker_x)
         else: return
     else:
         if screen_locker_wayland != None:
-            subprocess.run(screen_locker_wayland)
+            subprocess.Popen(screen_locker_wayland)
         else: return
+    if suspend:
+        subprocess.run(suspend_program)
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -146,7 +149,8 @@ keys = [
     Key([mod], "comma", lazy.function(window_cycle_screen)),
     Key([mod], "period", lazy.function(window_cycle_screen, move_window=False)),
     Key([alt], "Tab", lazy.group.next_window()),
-    Key([mod], "l", lazy.function(lock_screen, screen_locker_x=screen_locker))
+    Key([mod], "l", lazy.function(lock_screen, screen_locker_x=screen_locker)),
+    Key([mod, "shift"], "l", lazy.function(lock_screen, screen_locker_x=screen_locker, suspend=True))
 ]
 
 # Add key bindings to switch VTs in Wayland.
