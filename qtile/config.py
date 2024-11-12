@@ -42,7 +42,7 @@ suspend_program = ["systemctl", "suspend"]
 
 # MACHINE SPECIFIC VARS:
 userhome = os.path.expanduser("~/")
-
+config_dir = f"{userhome}/.config/qtile/"
 # BOOLEANS:
 cursor_warp=True
 
@@ -133,13 +133,10 @@ keys = [
         desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"), Key(
-        [mod], "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"), 
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod], "e", lazy.spawn("pcmanfm"), desc="Launch file [e]xplorer"),
+    Key([mod], "e", lazy.spawn("pcmanfm-qt"), desc="Launch file [e]xplorer"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "r", lazy.spawn(os.path.expanduser("~/.config/qtile/autostart.sh")), desc="Resize the virtual display to match the window"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -149,8 +146,8 @@ keys = [
     Key([mod], "comma", lazy.function(window_cycle_screen)),
     Key([mod], "period", lazy.function(window_cycle_screen, move_window=False)),
     Key([alt], "Tab", lazy.group.next_window()),
-    Key([mod], "l", lazy.function(lock_screen, screen_locker_x=screen_locker)),
-    Key([mod, "shift"], "l", lazy.function(lock_screen, screen_locker_x=screen_locker, suspend=True))
+    Key([alt], "l", lazy.function(lock_screen, screen_locker_x=screen_locker)),
+    Key([alt, "shift"], "l", lazy.function(lock_screen, screen_locker_x=screen_locker, suspend=True))
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -220,9 +217,9 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 # LaunchBar progs
-progs = [("firefox", "firefox", "open the web browser firefox"),
-         ("alacritty", "alacritty", "open the terminal emulator alacritty"),
-         ("pcmanfm", "pcmanfm", "open the file explorer pcmanfm")]
+progs = [(config_dir + "firefox.png", "firefox", "open the web browser firefox"),
+         (config_dir + "terminal.png", terminal, "open the terminal emulator alacritty"),
+         (config_dir + "folder.png", "pcmanfm-qt", "open the file explorer pcmanfm")]
 screens = [
     Screen(
         top=bar.Bar(
