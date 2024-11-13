@@ -39,6 +39,7 @@ os.environ['XCURSOR_THEME'] = 'Breeze_Light'
 preferred_terminal = "qterminal"
 screen_locker = ["betterlockscreen", "--lock"]
 suspend_program = ["systemctl", "suspend"]
+monospace = "Cascadia Code"
 
 # MACHINE SPECIFIC VARS:
 userhome = os.path.expanduser("~/")
@@ -53,6 +54,10 @@ def autostart_once():
         script= userhome + ".config/qtile/autostart-wayland.sh" 
         subprocess.run([script])
         logger.warning("Autostarted Wayland script")
+    else:
+        script= userhome + ".config/qtile/autostart-once.sh"
+        subprocess.run([script])
+        logger.warning("Started the autostart once script")
 @hook.subscribe.startup
 def autostart():
     if qtile.core.name != "wayland":
@@ -76,7 +81,7 @@ menu = "rofi -show drun"
 # make it simple to see if config gets updated
 date = datetime.now()
 logger.warning(date)
-date = f'{date.hour}:{date.minute}'
+date = f'{date.hour}:{date.minute:02d}'
 # Switch screen window functionality
 def window_cycle_screen(qtile, move_window=True, change_screen=True):
     i = qtile.screens.index(qtile.current_screen)
@@ -210,7 +215,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="Source Code Pro",
+    font=monospace,
     fontsize=16,
     padding=3,
 )
@@ -226,8 +231,9 @@ screens = [
             [
                 widget.CPUGraph(),
                 widget.GroupBox(),
-                widget.LaunchBar(progs=progs),
+                widget.LaunchBar(progs=progs, padding=5),
                 widget.Prompt(),
+                widget.Spacer(length=10),
                 widget.WindowName(),
                 widget.Chord(
                     chords_colors={
@@ -239,7 +245,8 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%m-%d %H:%M"),
+                # widget.BatteryIcon(theme_path="/usr/share/icons/Papirus-Dark"),
+                widget.Clock(format="%Y-%m-%d %H:%M"),
                 widget.CheckUpdates(distro="Arch"),
             ],
             32,
@@ -255,11 +262,17 @@ screens = [
     ),
     Screen(
         # for the second screen, if connected
+        top=bar.Bar(
+            [widget.GroupBox(),
+             widget.Spacer(length=10),
+             widget.WindowName(),
+             ],
+             32
+        ),
         wallpaper=userhome + "Pictures/wallpapers/budapest.jpg",
         wallpaper_mode="fill"
     ),
 ]
-
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()), 
