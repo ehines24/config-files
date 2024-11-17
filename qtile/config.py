@@ -34,7 +34,7 @@ import os
 import subprocess
 
 # ENVIRONMENT VARIABLES AND PREFERENCES 
-os.environ['QT_QPA_PLATFORMTHEME'] = 'qt6ct' 
+os.environ['QT_QPA_PLATFORMTHEME'] = 'qt5ct' 
 os.environ['XCURSOR_THEME'] = 'Breeze_Light'
 preferred_terminal = "qterminal"
 screen_locker = ["betterlockscreen", "--lock"]
@@ -55,9 +55,9 @@ def autostart_once():
         subprocess.run([script])
         logger.warning("Autostarted Wayland script")
     else:
+        logger.warning("Started the autostart once script")
         script= userhome + ".config/qtile/autostart-once.sh"
         subprocess.run([script])
-        logger.warning("Started the autostart once script")
 @hook.subscribe.startup
 def autostart():
     if qtile.core.name != "wayland":
@@ -69,6 +69,11 @@ def autostart():
 def window_rules(client):
     if "UMass Amherst Mail" in client.name:
         client.togroup("3")
+    if "Google Keep" in client.name:
+        client.togroup("1")
+    if "ksnip" in client.name:
+        client.enable_floating()
+        client.center()
 @hook.subscribe.screens_reconfigured
 def screen_reconf():
     logger.warning("Screens have been reconfigured")
@@ -129,7 +134,6 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    # TODO figure out the best way to automatically change resolution with spice-vdagent
     Key(
         [mod, "shift"],
         "Return", lazy.layout.toggle_split(), 
@@ -244,6 +248,7 @@ screens = [
                 widget.TextBox(f"configuration at {str(date)}", name="default"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.Bluetooth(background = "#445e93", fmt="<b>{}</b>", padding=10), 
                 widget.Systray(),
                 # widget.BatteryIcon(theme_path="/usr/share/icons/Papirus-Dark"),
                 widget.Clock(format="%Y-%m-%d %H:%M"),
