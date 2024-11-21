@@ -7,3 +7,5 @@ dunst &
 nm-applet &
 # turn on volume controls
 pasystray &
+# turn on battery icon
+lxqt-powermanagement &

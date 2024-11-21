@@ -78,7 +78,11 @@ def window_rules(client):
 def screen_reconf():
     logger.warning("Screens have been reconfigured")
     qtile.reload_config()
-
+@lazy.group.function
+def unminimize_all(group):
+    for win in group.windows:
+        if win.minimized:
+            win.toggle_minimize()
 mod = "mod4"
 alt = "mod1"
 terminal = preferred_terminal if not None else guess_terminal()
@@ -116,7 +120,6 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -149,14 +152,15 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "r", lazy.spawn(os.path.expanduser("~/.config/qtile/autostart.sh")), desc="Resize the virtual display to match the window"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawn(menu), desc="Spawn a command using a prompt widget"),
+    Key([mod], "space", lazy.spawn(menu), desc="Spawn a command using a prompt widget"),
     # custom keys
     Key([mod], "i", lazy.spawn("firefox"), desc="Quick shortcut to [i]nternet browser"),
     Key([mod], "comma", lazy.function(window_cycle_screen)),
     Key([mod], "period", lazy.function(window_cycle_screen, move_window=False)),
     Key([alt], "Tab", lazy.group.next_window()),
     Key([alt], "l", lazy.function(lock_screen, screen_locker_x=screen_locker)),
-    Key([alt, "shift"], "l", lazy.function(lock_screen, screen_locker_x=screen_locker, suspend=True))
+    Key([alt, "shift"], "l", lazy.function(lock_screen, screen_locker_x=screen_locker, suspend=True)),
+    Key([mod, "shift"], "m", unminimize_all, desc="Unminimize all windows in current group")
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -252,7 +256,7 @@ screens = [
                 widget.Systray(),
                 # widget.BatteryIcon(theme_path="/usr/share/icons/Papirus-Dark"),
                 widget.Clock(format="%Y-%m-%d %H:%M"),
-                widget.CheckUpdates(distro="Arch"),
+                widget.Image(filename=config_dir + "shutdown.png", mouse_callbacks={"Button1": lazy.spawn(config_dir + "PowerOptions/dialog.py")}),
             ],
             32,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
