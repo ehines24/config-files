@@ -1,0 +1,22 @@
+[Desktop Entry]
+DefaultProfile=Just Right.profile
+
+[General]
+ConfigVersion=1
+
+[MainWindow]
+1536x864 screen: Height=524
+1536x864 screen: Width=911
+1920x1080 screen: Height=1022
+1920x1080 screen: Width=960
+2 screens: Height=1022
+2 screens: Width=1920
+2 screens: Window-Maximized=true
+MenuBar=Enabled
+ToolBarsMovable=Disabled
+
+[Notification Messages]
+CloseAllTabs=true
+
+[UiSettings]
+ColorScheme=

@@ -1,0 +1,4 @@
+If switching to hyprland the following packages should be installed
+mako -> for notifications
+xdg-desktop-portal-hyprland -> for screensharing
+pauvcontrol -> for controlling media

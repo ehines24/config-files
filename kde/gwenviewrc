@@ -1,0 +1,50 @@
+[$Version]
+update_info=gwenview.upd:SideBar_StatusBar_Rename,gwenview.upd:ImageView_AlphaBackgroundMode_Update,gwenview.upd:DeleteThumbnailSetting_Rename
+
+[FileDialogSize]
+2 screens: Height=540
+2 screens: Width=960
+
+[General]
+LastTargetDir[$e]=file:$HOME/Documents/slow_lane_documents/device_info/samsung_5series_tv
+LastUsedVersion=210800
+SideBarPage=operations
+
+[MainWindow]
+1920x1080 screen: Window-Maximized=true
+MenuBar=Disabled
+RestorePositionForNextInstance=false
+ToolBarsMovable=Disabled
+
+[Phonon::AudioOutput]
+Gwenview_Volume=1
+
+[Print]
+PrintHeight=32.48
+
+[Recent Files]
+File1[$e]=/media/slow_lane/Documents/device_info/samsung_5series_tv/model_information.jpg
+File10[$e]=$HOME/Downloads/sample1.heif
+File2[$e]=/media/networkscans/scan_20241228_174429_000501.png
+File3[$e]=/media/networkscans/scan_20241228_174450_000503.png
+File4[$e]=/media/networkscans/scan_20241228_174716_000505.png
+File5[$e]=/media/networkscans/scan_20241228_174814_000509.png
+File6[$e]=/media/networkscans/scan_20241228_174748_000507.png
+File7[$e]=/media/networkscans/scan_20241228_173852_000499.png
+File8[$e]=/media/networkscans/scan_20241228_150958_000495.png
+File9[$e]=/media/networkscans/scan_20241228_173713_000497.png
+Name1[$e]=model_information.jpg
+Name10[$e]=sample1.heif
+Name2[$e]=scan_20241228_174429_000501.png
+Name3[$e]=scan_20241228_174450_000503.png
+Name4[$e]=scan_20241228_174716_000505.png
+Name5[$e]=scan_20241228_174814_000509.png
+Name6[$e]=scan_20241228_174748_000507.png
+Name7[$e]=scan_20241228_173852_000499.png
+Name8[$e]=scan_20241228_150958_000495.png
+Name9[$e]=scan_20241228_173713_000497.png
+
+[SideBar]
+InformationSplitterSizes=218,257
+IsVisible ViewMode=true
+SideBarSplitterSizes=216,1061

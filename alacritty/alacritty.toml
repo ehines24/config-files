@@ -1,0 +1,30 @@
+[colors.bright]
+black = "#686868"
+blue = "#3b78ff"
+cyan = "#54ffff"
+green = "#54ff54"
+magenta = "#ff54ff"
+red = "#ff5454"
+white = "#ffffff"
+yellow = "#ffff54"
+
+[colors.normal]
+black = "#0c0c0c"
+blue = "#1818b2"
+cyan = "#18b2b2"
+green = "#18b218"
+magenta = "#b218b2"
+red = "#b21818"
+white = "#b2b2b2"
+yellow = "#b26818"
+
+[colors.primary]
+background = "#000000"
+foreground = "#cccccc"
+
+[font]
+size = 12
+
+[font.normal]
+family = "Cascadia Mono"
+style = "regular"

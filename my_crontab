@@ -1,0 +1,2 @@
+30 11 * * * /home/eddie/.local/bin/reindex
+0 17 20 * * rm -rf Downloads

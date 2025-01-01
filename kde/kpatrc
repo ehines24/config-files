@@ -1,0 +1,35 @@
+[General Settings]
+Cardname=svg-standard
+RememberStateOnExit=true
+
+[KgTheme]
+Theme=themes/cleangreen.desktop
+
+[MainWindow]
+ToolBarsMovable=Disabled
+
+[Notification Messages]
+careaboutstats=false
+
+[Scores]
+loosestreak0=1
+loosestreak15=5
+loosestreak5=1
+maxloosestreak0=1
+maxloosestreak15=21
+maxloosestreak5=1
+maxwinstreak0=0
+maxwinstreak15=3
+maxwinstreak5=0
+minmoves0=-1
+minmoves15=136
+minmoves5=-1
+total0=1
+total15=315
+total5=1
+winstreak0=0
+winstreak15=0
+winstreak5=0
+won0=0
+won15=63
+won5=0

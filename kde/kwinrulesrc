@@ -1,0 +1,83 @@
+[$Version]
+update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
+
+[03818b3e-ff4e-41ee-b3f1-644913191a7e]
+Description=Keep Signal in Lesiure
+desktops=7b097d00-7ea0-4df0-bcdc-4eecfc2f3166
+desktopsrule=2
+types=1
+wmclass=Signal
+wmclassmatch=2
+
+[1]
+Description=Keep Lesuire in Lesiure
+desktops=7b097d00-7ea0-4df0-bcdc-4eecfc2f3166
+desktopsrule=2
+title=Google Keep
+titlematch=2
+types=1
+wmclass=firefox
+wmclassmatch=1
+
+[2]
+Description=Keep UMass in Mission Control
+desktops=b63f25c7-3f79-4b4d-9c92-9289b20280fb
+desktopsrule=2
+title=UMass Amherst Mail
+titlematch=2
+types=1
+wmclass=firefox
+wmclassmatch=1
+
+[59ee3c1c-07e8-4ad3-878a-4b8a88637174]
+Description=Window settings for firefox
+desktops=7b097d00-7ea0-4df0-bcdc-4eecfc2f3166,b63f25c7-3f79-4b4d-9c92-9289b20280fb
+desktopsrule=3
+title=Google Messages for web — Mozilla Firefox
+titlematch=1
+types=1
+wmclass=firefox
+wmclassmatch=1
+
+[66d41389-aaf4-446c-ac7e-8b3c0b8c3934]
+Description=Keep UMass in Mission Control
+title=Inbox - ehines@umass.edu - UMass Amherst Mail — Mozilla Firefox
+titlematch=1
+types=1
+wmclass=firefox
+wmclassmatch=1
+
+[730d736c-56be-4fb3-9664-6a9f98b0cc90]
+Description=Keep UMass in Mission Control
+desktops=b63f25c7-3f79-4b4d-9c92-9289b20280fb
+desktopsrule=2
+title=UMass
+titlematch=2
+types=1
+wmclass=firefox
+wmclassmatch=1
+
+[77c02ff3-7954-457b-b5db-66763ac91c5f]
+Description=Window settings for firefox
+desktops=7b097d00-7ea0-4df0-bcdc-4eecfc2f3166,b63f25c7-3f79-4b4d-9c92-9289b20280fb
+desktopsrule=2
+title=Google Keep
+titlematch=2
+types=1
+wmclass=firefox
+wmclassmatch=1
+
+[General]
+count=4
+rules=1,2,a37a287c-c389-4d10-8a74-3d6c79411cc8,03818b3e-ff4e-41ee-b3f1-644913191a7e
+
+[a37a287c-c389-4d10-8a74-3d6c79411cc8]
+Description=Keep Thunderbird in Mission Control
+desktops=b63f25c7-3f79-4b4d-9c92-9289b20280fb
+desktopsrule=2
+wmclass=org.mozilla.Thunderbird
+wmclassmatch=1
+
+[bec031ba-a17b-4195-9cdb-b2d4f8397dc6]
+desktops=7b097d00-7ea0-4df0-bcdc-4eecfc2f3166
+desktopsrule=3

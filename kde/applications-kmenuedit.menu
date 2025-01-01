@@ -1,0 +1,49 @@
+<!DOCTYPE Menu PUBLIC '-//freedesktop//DTD Menu 1.0//EN' 'http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd'>
+<Menu>
+ <Layout>
+  <Merge type="menus"/>
+  <Menuname>Development</Menuname>
+  <Menuname>Education</Menuname>
+  <Menuname>Games</Menuname>
+  <Menuname>Graphics</Menuname>
+  <Menuname>Internet</Menuname>
+  <Menuname>Multimedia</Menuname>
+  <Menuname>Office</Menuname>
+  <Menuname>Science</Menuname>
+  <Menuname>Settingsmenu</Menuname>
+  <Menuname>System</Menuname>
+  <Menuname>Utilities</Menuname>
+  <Menuname>Applications</Menuname>
+ </Layout>
+ <Menu>
+  <Name>Utilities</Name>
+  <Include>
+   <Filename>Unzip.desktop</Filename>
+   <Filename>View Markdown.desktop</Filename>
+   <Filename>View RTF.desktop</Filename>
+  </Include>
+  <Exclude/>
+  <Layout>
+   <Merge type="files"/>
+   <Filename>View Markdown.desktop</Filename>
+   <Filename>View RTF.desktop</Filename>
+   <Merge type="menus"/>
+   <Menuname>XUtilities</Menuname>
+   <Filename>org.kde.plasma.emojier.desktop</Filename>
+   <Filename>Unzip.desktop</Filename>
+   <Filename>com.github.tchx84.Flatseal.desktop</Filename>
+   <Filename>io.gitlab.idevecore.Pomodoro.desktop</Filename>
+   <Filename>solaar.desktop</Filename>
+   <Filename>org.kde.spectacle.desktop</Filename>
+   <Filename>vim.desktop</Filename>
+   <Filename>code.desktop</Filename>
+   <Filename>org.kde.plasma-welcome.desktop</Filename>
+   <Separator/>
+   <Menuname>More</Menuname>
+  </Layout>
+ </Menu>
+ <Include/>
+ <Exclude>
+  <Filename>Unzip.desktop</Filename>
+ </Exclude>
+</Menu>

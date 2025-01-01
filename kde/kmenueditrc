@@ -1,0 +1,10 @@
+[General]
+SplitterSizes=803,1116
+
+[KFileDialog Settings]
+Recent Files[$e]=file:///home/eddie/.local/bin/unzip_context
+Recent URLs[$e]=file:///home/eddie/.local/bin/
+detailViewIconSize=16
+
+[MainWindow]
+ToolBarsMovable=Disabled

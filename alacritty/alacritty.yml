@@ -1,0 +1,35 @@
+# Set Cascadia Mono as the font at a resonable size
+font:
+  normal:
+    family: Cascadia Mono
+    style: regular
+  size: 8
+
+# Campbell (Windows 10 default)
+colors:
+  # Default colors
+  primary:
+    background: '#000000'
+    foreground: '#cccccc'
+
+  # Normal colors
+  normal:
+    black:      '#0c0c0c'
+    red:        '#b21818'
+    green:      '#18b218'
+    yellow:     '#b26818'
+    blue:       '#1818b2'
+    magenta:    '#b218b2'
+    cyan:       '#18b2b2'
+    white:      '#b2b2b2'
+
+  # Bright colors
+  bright:
+    black:      '#686868'
+    red:        '#ff5454'
+    green:      '#54ff54'
+    yellow:     '#ffff54'
+    blue:       '#3b78ff'
+    magenta:    '#ff54ff'
+    cyan:       '#54ffff'
+    white:      '#ffffff'

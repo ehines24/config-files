@@ -1,0 +1,9 @@
+[FileDialogSize]
+1920x1080 screen: Height=599
+1920x1080 screen: Width=980
+2 screens: Height=599
+2 screens: Width=980
+2 screens: Window-Maximized=true
+
+[KFileDialog Settings]
+detailViewIconSize=22

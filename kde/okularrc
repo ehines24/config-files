@@ -1,0 +1,35 @@
+[Desktop Entry]
+FullScreen=false
+
+[General]
+LockSidebar=true
+ShowSidebar=true
+
+[MainWindow]
+1920x1080 screen: Height=1022
+1920x1080 screen: Width=960
+2 screens: Height=1022
+2 screens: Width=960
+ToolBarsMovable=Disabled
+
+[Recent Files]
+File1[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/stat516/homework/4/hw4.pdf
+File10[$e]=$HOME/Downloads/panic_ocr.pdf
+File2[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/stat516/homework/4/submission/homework4submissioncompressed.pdf
+File3[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/m551/homework/3/submission.pdf
+File4[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/m551/homework/3/hw3.pdf
+File5[$e]=/run/media/eddie/slow_lane/Documents/od_umass/cs_courses/cs501/homework/2/hw2_sol.pdf
+File6[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/stat516/syllabus_stat516_S24.pdf
+File7[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/stat516/homework/1/homework1writeup.pdf
+File8[$e]=/run/media/eddie/slow_lane/Documents/od_umass/math_courses/stat516/homework/2/homework2writeup-pc-eddie-5.pdf
+File9[$e]=/run/media/eddie/slow_lane/Documents/books/textbooks/stat516/textbook.pdf
+Name1[$e]=hw4.pdf
+Name10[$e]=panic_ocr.pdf
+Name2[$e]=homework4submissioncompressed.pdf
+Name3[$e]=submission.pdf
+Name4[$e]=hw3.pdf
+Name5[$e]=hw2_sol.pdf
+Name6[$e]=syllabus_stat516_S24.pdf
+Name7[$e]=homework1writeup.pdf
+Name8[$e]=homework2writeup-pc-eddie-5.pdf
+Name9[$e]=textbook.pdf
