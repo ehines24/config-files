@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+        notify-send "Please provide an RTF file"
+fi
+
+OUT=/tmp/viewrtf.html
+echo "file $1 <br>" > $OUT
+unrtf $1 >> $OUT 
+
+xdg-open $OUT 

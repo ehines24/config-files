@@ -1,0 +1,33 @@
+#!/bin/python
+import csv
+import glob
+import sys
+
+DIRNAME = sys.argv[1]
+
+def print_row(out, line):
+  out.write("|" + "|".join(line) + "|\n")
+
+def print_header(out, line):
+  dashes = ["-" * len(w) for w in line]
+  print_row(out, dashes)
+
+def to_markdown(reader, md_filename):
+  try:
+    # open in text-write mode, fail if file exists
+    out = open(md_filename, "x")
+    for i, line in enumerate(reader):
+        print_row(out, line)
+        # we always treat first line as header
+        if i == 0:
+          print_header(out, line)
+      
+  except Exception as exc:
+    print(f"error on {md_filename}: {exc}")
+  finally:
+    out.close()
+
+for filename in glob.glob(f"{DIRNAME}/*.csv"):
+  md_filename = filename.rsplit(".", 1)[0] + ".md"
+  reader = csv.reader(filename)
+  to_markdown(reader, md_filename)

@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+if [[ -z $1 ]]; then
+        notify-send "Please supply a file"
+        exit 1
+fi
+notify-send "Unzipping $1"
+unzip "$1" -d "$1-out"
+xdg-open "$1-out"

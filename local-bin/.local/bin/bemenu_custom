@@ -1,0 +1,3 @@
+#!/bin/bash
+bemenu --list 10 --tf "#45abb7" --nf "#45abb7" --hf "#00FFFF" --prompt "$1" --fn 'Lexend Deca 18'
+

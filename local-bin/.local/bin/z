@@ -1,0 +1,4 @@
+#!/bin/bash 
+
+drive="/media/slow_lane"
+cd "$drive/$(cat $drive/directories | fzf )"

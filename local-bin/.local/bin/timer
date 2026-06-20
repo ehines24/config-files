@@ -1,0 +1,17 @@
+#!/bin/python
+from time import sleep
+from sys import argv
+
+bell_length = 5 
+timer_length = 0;
+if len(argv) == 1:
+    print("Please enter the timer length, in minutes");
+    exit()
+else:
+    timer_length = float(argv[1])
+    timer_length *= 60
+while timer_length > 0:
+    sleep(1)
+    timer_length -= 1
+    print(timer_length, end="\r")
+print(bell_length * "\a")

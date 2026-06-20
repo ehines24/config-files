@@ -1,0 +1,8 @@
+#!/bin/bash
+
+datafile="/run/media/eddie/slow_lane/database"
+pwd="/run/media/eddie/slow_lane"
+notify-send "Reindexing files..."
+find $pwd > $datafile
+pwd="/home/eddie/"
+find $pwd >> $datafile 

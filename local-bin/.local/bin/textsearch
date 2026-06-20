@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ -z $2 ]]; then 
+        DIR='.'
+        SEARCH=$1
+else
+        DIR=$1
+        SEARCH=$2
+fi
+echo "Executing search of $DIR for $SEARCH"
+echo "File content matches:"
+grep -Rnwi $DIR -e $SEARCH | column -l 3 -t -s ":" -N "File,Line,Match" # full text search of directory
+echo "Filename matches:"
+find $DIR -name "*$SEARCH*" # find files and directory matching search
+

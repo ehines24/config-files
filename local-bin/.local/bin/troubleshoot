@@ -1,0 +1,15 @@
+#!/bin/bash
+PATH=$PATH:$HOME/.local/bin
+SEARCH=$(bemenu_custom "Troubleshoot Search:" < /dev/null)
+TROUBLESHOOT_DIR=$HOME/Documents/troubleshooting
+RESULTS=$(grep -Rniw $TROUBLESHOOT_DIR -e $SEARCH)
+if [[ -z $RESULTS ]]; then
+        notify-send "No results"
+        exit 1
+fi
+SELECT_RESULT=$(echo "$RESULTS" | sed "s#$TROUBLESHOOT_DIR##g" | bemenu_custom "Select result:" | awk -F ":" '{print $1}')
+if [[ -z $SELECT_RESULT ]]; then
+        notify-send "Cancelled"
+        exit 1
+fi
+xdg-open $TROUBLESHOOT_DIR$SELECT_RESULT 

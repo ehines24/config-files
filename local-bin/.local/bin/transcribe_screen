@@ -1,0 +1,6 @@
+#!/bin/bash
+OUTPUT="/tmp/transcribe.png"
+spectacle -r -b -n -o $OUTPUT
+tesseract $OUTPUT - | sort -u | wl-copy
+echo "Text context of screenshot saved to clipboard"
+notify-send "Text content of screenshot saved to clipboard"

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+notify-send "$(python /run/media/eddie/slow_lane/Documents/od_umass/hobby_programming_work/misc/python-nws/nws.py 23 81 Amherst)"

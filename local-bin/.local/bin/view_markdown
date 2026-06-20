@@ -1,0 +1,21 @@
+#!/bin/python
+from markdown import markdown
+from sys import argv, stdin
+import subprocess
+
+temporary_location = "/tmp/view_md.html"
+def write_markdown(filename):
+    with open(temporary_location, "w") as out:
+        out.write(f'file {filename}')
+        out.write(html)
+        subprocess.run(['xdg-open', temporary_location])
+if (len(argv) != 2):
+    html=markdown(stdin.read())
+    write_markdown("stdin")
+    exit()
+    #err_message = "This program must be opened with a file"
+    #subprocess.run(['notify-send', err_message])
+    #exit()
+with open(argv[1]) as file:
+    html=markdown(file.read())
+    write_markdown(argv[1])
