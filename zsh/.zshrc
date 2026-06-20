@@ -122,7 +122,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-alias update="sudo timeshift --check && paru && sudo flatpak update"
+alias update="update.sh"
 alias feh="feh --auto-zoom --scale-down --action 'firefox %F'"
 alias ll="ls -lah"
 
