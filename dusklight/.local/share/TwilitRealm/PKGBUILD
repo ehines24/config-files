@@ -1,0 +1,47 @@
+pkgname=dusklight
+pkgver=r6709.eed14acdc6
+pkgrel=1
+pkgdesc="Twilight Princess decomp, GC NA or EU game required"
+arch=(x86_64)
+url=https://github.com/TwilitRealm/dusklight
+license=(CC0-1.0)
+depends=(alsa-lib base-devel clang cmake freetype2 libpulse libxrandr lld llvm ninja python python-markupsafe vulkan-headers)
+source=("git+https://github.com/TwilitRealm/$pkgname.git")
+sha256sums=('SKIP')
+md5sums=('SKIP')
+srcdir="./src"
+pkgdir="."
+pkgver() {
+  cd "$srcdir/$pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+prepare() {
+       if [[ ! -f "../$pkgname.desktop" ]]; then 
+               echo "Please place a desktop file for $pkgname (from config files) into this directory"
+               ls
+               exit 1
+       else
+               echo "Desktop file for $pkgname found, continue"
+       fi
+       echo "Now preparing package, submodule update"
+       cd "$srcdir/$pkgname"
+       git submodule update --init --recursive
+}
+build() {
+       echo "Now building"
+       cd "$srcdir/$pkgname"
+       cmake --preset linux-default-relwithdebinfo
+       cmake --build --preset linux-default-relwithdebinfo
+}
+package() {
+        echo "Now installing the package"
+        mkdir -p "$pkgdir/usr/share/$pkgname/mods"
+        mkdir -p "$pkgdir/usr/share/$pkgname/res"
+        mkdir -p "$pkgdir/usr/share/applications"
+        mkdir -p "$pkgdir/usr/bin"
+        install -Dm755 "$srcdir/$pkgname/build/linux-default-relwithdebinfo/$pkgname" "$pkgdir/usr/share/$pkgname/$pkgname"
+        ln -s "/usr/share/$pkgname/$pkgname" "$pkgdir/usr/bin/$pkgname"
+        cp -r "$srcdir/$pkgname/build/linux-default-relwithdebinfo/bundled_mods" "$pkgdir/usr/share/$pkgname/mods"
+        cp -r "$srcdir/$pkgname/build/linux-default-relwithdebinfo/res" "$pkgdir/usr/share/$pkgname/"
+        install -Dm755 "../$pkgname.desktop" "$pkgdir/usr/share/applications/"
+}

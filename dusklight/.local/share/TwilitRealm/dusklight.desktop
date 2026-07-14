@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=Play the PC Port of The Legend of Zelda: Twilight Princess (Gamecube ROM required)
+Exec=/usr/bin/dusklight
+Name=Dusklight
+Icon=/usr/share/dusklight/res/icon.png
+Terminal=false
+Type=Application
+PrefersNonDefaultGPU=false
+NoDisplay=false
+Categories=Game
